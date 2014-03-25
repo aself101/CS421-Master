@@ -1,3 +1,3 @@
 print 'What is your name?:'
 name=gets()
-print('Hi %s! '%(name))
+print('Hi %s!'%(name.chomp))
