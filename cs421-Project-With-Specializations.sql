@@ -26,7 +26,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tblStudent` (
   `user_id` VARCHAR(8) NOT NULL,
   `major` VARCHAR(100) NOT NULL DEFAULT 'undeclared',
   `term` VARCHAR(6) NOT NULL,
-  PRIMARY KEY (`user_id`))
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_tblStudent_tblUser`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `mydb`.`tblUser` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -96,7 +101,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tblStaff` (
   `position` VARCHAR(25) NOT NULL,
   `user_name` VARCHAR(10) NOT NULL,
   `password` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`user_id`))
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_tblStaff_tblUser`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `mydb`.`tblUser` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -119,7 +129,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`tblRegular_Staff` (
   `user_id` VARCHAR(8) NOT NULL,
-  PRIMARY KEY (`user_id`))
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_tblRegular_Staff_tblStaff`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `mydb`.`tblStaff` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -128,7 +143,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`tblAdministrator` (
   `user_id` VARCHAR(8) NOT NULL,
-  PRIMARY KEY (`user_id`))
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_tblAdministrator_tblStaff`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `mydb`.`tblStaff` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -140,7 +160,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tblApproves` (
   `eq_course_alpha` VARCHAR(6) NOT NULL,
   `eq_course_num` VARCHAR(6) NOT NULL,
   `approval_time_stamp` DATETIME NOT NULL,
-  PRIMARY KEY (`user_id`, `eq_course_alpha`, `eq_course_num`))
+  `tblAdministrator_user_id` VARCHAR(8) NOT NULL,
+  `tblAdministrator_tblStaff_user_id` VARCHAR(8) NOT NULL,
+  `tblAdministrator_tblStaff_tblUser_user_id` VARCHAR(8) NOT NULL,
+  PRIMARY KEY (`user_id`, `eq_course_alpha`, `eq_course_num`, `tblAdministrator_user_id`, `tblAdministrator_tblStaff_user_id`, `tblAdministrator_tblStaff_tblUser_user_id`))
 ENGINE = InnoDB;
 
 
