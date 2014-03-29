@@ -54,19 +54,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`tblInstitution`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`tblInstitution` (
-  `name` VARCHAR(50) NOT NULL,
-  `city` VARCHAR(60) NOT NULL,
-  `state` VARCHAR(2) NOT NULL,
-  `zip` VARCHAR(20) NOT NULL,
-  `website` VARCHAR(100) NULL,
-  PRIMARY KEY (`name`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `mydb`.`tblTransfer_Course`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`tblTransfer_Course` (
@@ -78,17 +65,24 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tblTransfer_Course` (
   `effective_term` VARCHAR(6) NOT NULL,
   `grp` CHAR(1) NULL,
   PRIMARY KEY (`transfer_course_alpha`, `transfer_course_num`, `transfer_inst_name`),
-  INDEX `fk_tblTransfer_Course_tblInstitution1_idx` (`transfer_inst_name` ASC),
-  CONSTRAINT `fk_tblTransfer_Course_tblInstitution`
-    FOREIGN KEY (`transfer_inst_name`)
-    REFERENCES `mydb`.`tblInstitution` (`name`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
   CONSTRAINT `fk_tblTransfer_Course_tblTransfers_In`
-    FOREIGN KEY (`transfer_course_alpha` , `transfer_course_num` , `transfer_inst_name`)
-    REFERENCES `mydb`.`tblTransfers_In` (`transfer_course_alpha` , `transfer_course_num` , `transfer_inst_name`)
+    FOREIGN KEY (`transfer_inst_name`)
+    REFERENCES `mydb`.`tblTransfers_In` (`transfer_inst_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tblInstitution`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`tblInstitution` (
+  `name` VARCHAR(50) NOT NULL,
+  `city` VARCHAR(60) NOT NULL,
+  `state` VARCHAR(2) NOT NULL,
+  `zip` VARCHAR(20) NOT NULL,
+  `website` VARCHAR(100) NULL,
+  PRIMARY KEY (`name`))
 ENGINE = InnoDB;
 
 
@@ -216,58 +210,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tblOr_Equivalent` (
   CONSTRAINT `fk_tblOr_Equivalent_tblEquivalent_Course1`
     FOREIGN KEY (`eq_course_alpha` , `eq_course_num`)
     REFERENCES `mydb`.`tblEquivalent_Course` (`eq_course_alpha` , `eq_course_alpha`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`tblStudent_has_tblTransfers_In`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`tblStudent_has_tblTransfers_In` (
-  `tblStudent_user_id` VARCHAR(8) NOT NULL,
-  `tblTransfers_In_transfer_course_alpha` VARCHAR(6) NOT NULL,
-  `tblTransfers_In_transfer_course_num` VARCHAR(6) NOT NULL,
-  `tblTransfers_In_transfer_inst_name` VARCHAR(50) NOT NULL,
-  `tblTransfers_In_user_id` VARCHAR(8) NOT NULL,
-  PRIMARY KEY (`tblStudent_user_id`, `tblTransfers_In_transfer_course_alpha`, `tblTransfers_In_transfer_course_num`, `tblTransfers_In_transfer_inst_name`, `tblTransfers_In_user_id`),
-  INDEX `fk_tblStudent_has_tblTransfers_In_tblTransfers_In1_idx` (`tblTransfers_In_transfer_course_alpha` ASC, `tblTransfers_In_transfer_course_num` ASC, `tblTransfers_In_transfer_inst_name` ASC, `tblTransfers_In_user_id` ASC),
-  INDEX `fk_tblStudent_has_tblTransfers_In_tblStudent1_idx` (`tblStudent_user_id` ASC),
-  CONSTRAINT `fk_tblStudent_has_tblTransfers_In_tblStudent1`
-    FOREIGN KEY (`tblStudent_user_id`)
-    REFERENCES `mydb`.`tblStudent` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tblStudent_has_tblTransfers_In_tblTransfers_In1`
-    FOREIGN KEY (`tblTransfers_In_transfer_course_alpha` , `tblTransfers_In_transfer_course_num` , `tblTransfers_In_transfer_inst_name` , `tblTransfers_In_user_id`)
-    REFERENCES `mydb`.`tblTransfers_In` (`transfer_course_alpha` , `transfer_course_num` , `transfer_inst_name` , `user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`tblTransfers_In_has_tblTransfer_Course`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`tblTransfers_In_has_tblTransfer_Course` (
-  `tblTransfers_In_transfer_course_alpha` VARCHAR(6) NOT NULL,
-  `tblTransfers_In_transfer_course_num` VARCHAR(6) NOT NULL,
-  `tblTransfers_In_transfer_inst_name` VARCHAR(50) NOT NULL,
-  `tblTransfers_In_user_id` VARCHAR(8) NOT NULL,
-  `tblTransfer_Course_transfer_course_alpha` VARCHAR(6) NOT NULL,
-  `tblTransfer_Course_transfer_course_num` VARCHAR(6) NOT NULL,
-  `tblTransfer_Course_transfer_inst_name` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`tblTransfers_In_transfer_course_alpha`, `tblTransfers_In_transfer_course_num`, `tblTransfers_In_transfer_inst_name`, `tblTransfers_In_user_id`, `tblTransfer_Course_transfer_course_alpha`, `tblTransfer_Course_transfer_course_num`, `tblTransfer_Course_transfer_inst_name`),
-  INDEX `fk_tblTransfers_In_has_tblTransfer_Course_tblTransfer_Cours_idx` (`tblTransfer_Course_transfer_course_alpha` ASC, `tblTransfer_Course_transfer_course_num` ASC, `tblTransfer_Course_transfer_inst_name` ASC),
-  INDEX `fk_tblTransfers_In_has_tblTransfer_Course_tblTransfers_In1_idx` (`tblTransfers_In_transfer_course_alpha` ASC, `tblTransfers_In_transfer_course_num` ASC, `tblTransfers_In_transfer_inst_name` ASC, `tblTransfers_In_user_id` ASC),
-  CONSTRAINT `fk_tblTransfers_In_has_tblTransfer_Course_tblTransfers_In1`
-    FOREIGN KEY (`tblTransfers_In_transfer_course_alpha` , `tblTransfers_In_transfer_course_num` , `tblTransfers_In_transfer_inst_name` , `tblTransfers_In_user_id`)
-    REFERENCES `mydb`.`tblTransfers_In` (`transfer_course_alpha` , `transfer_course_num` , `transfer_inst_name` , `user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tblTransfers_In_has_tblTransfer_Course_tblTransfer_Course1`
-    FOREIGN KEY (`tblTransfer_Course_transfer_course_alpha` , `tblTransfer_Course_transfer_course_num` , `tblTransfer_Course_transfer_inst_name`)
-    REFERENCES `mydb`.`tblTransfer_Course` (`transfer_course_alpha` , `transfer_course_num` , `transfer_inst_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
