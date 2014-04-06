@@ -1,4 +1,6 @@
 Proj421::Application.routes.draw do
+  get "dbmanager/form"
+  get "institution/form"
   get "welcome/index"
   resources :posts
   # The priority is based upon order of creation: first created -> highest priority.
