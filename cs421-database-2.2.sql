@@ -23,23 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 
-SET FOREIGN_KEY_CHECKS=0; 
-DROP TABLE tbl_administrator; 
-DROP TABLE tbl_and_equivalent; 
-DROP TABLE tbl_approves; 
-DROP TABLE tbl_equivalent_course; 
-DROP TABLE tbl_institution; 
-DROP TABLE tbl_or_equivalent; 
-DROP TABLE tbl_regular_staff; 
-DROP TABLE tbl_staff; 
-DROP TABLE tbl_student; 
-DROP TABLE tbl_transfers_in; 
-DROP TABLE tbl_transfer_course; 
-DROP TABLE tbl_user; 
-SET FOREIGN_KEY_CHECKS=1; 
-
-
-
 -- --------------------------------------------------------
 
 
@@ -53,7 +36,11 @@ CREATE TABLE IF NOT EXISTS `tbl_administrator` (
   `user_id` varchar(8) NOT NULL,
   `approval_flag` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblAdministrator_tblStaff` 
+  FOREIGN KEY (`user_id`) 
+  REFERENCES `tbl_staff` (`user_id`) ON DELETE CASCADE 
+  ON UPDATE CASCADE) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -68,7 +55,12 @@ CREATE TABLE IF NOT EXISTS `tbl_and_equivalent` (
   `eq_hours` varchar(5) NOT NULL,
   `uhh_atr` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`eq_course_alpha`,`eq_course_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblAnd_Equivalent_tblEquivalent_Course` 
+  FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) 
+  REFERENCES `tbl_equivalent_course` (`eq_course_alpha`, `eq_course_num`) 
+  ON DELETE NO ACTION 
+  ON UPDATE NO ACTION)   
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -82,8 +74,17 @@ CREATE TABLE IF NOT EXISTS `tbl_approves` (
   `eq_course_num` varchar(6) NOT NULL,
   `approval_time_stamp` datetime NOT NULL,
   PRIMARY KEY (`user_id`,`eq_course_alpha`,`eq_course_num`),
-  KEY `fk_tblApproves_tblEquivalent_Course_idx` (`eq_course_alpha`,`eq_course_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblApproves_tblAdministrator` 
+  FOREIGN KEY (`user_id`) 
+  REFERENCES `tbl_administrator` (`user_id`) 
+  ON DELETE NO ACTION 
+  ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tblApproves_tblEquivalent_Course` 
+  FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) 
+  REFERENCES `tbl_equivalent_course` (`eq_course_alpha`, `eq_course_num`) 
+  ON DELETE NO ACTION 
+  ON UPDATE NO ACTION) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -101,7 +102,12 @@ CREATE TABLE IF NOT EXISTS `tbl_equivalent_course` (
   `date_updated` date NOT NULL,
   `pr` char(1) DEFAULT NULL,
   PRIMARY KEY (`eq_course_alpha`,`eq_course_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblEquivalent_Course_tblTransfer_Course` 
+  FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) 
+  REFERENCES `tbl_transfer_course` (`transfer_course_alpha`, `transfer_course_num`) 
+  ON DELETE NO ACTION 
+  ON UPDATE NO ACTION)
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -131,7 +137,12 @@ CREATE TABLE IF NOT EXISTS `tbl_or_equivalent` (
   `eq_hours` varchar(5) NOT NULL,
   `uhh_atr` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`eq_course_alpha`,`eq_course_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblOr_Equivalent_tblEquivalent_Course` 
+  FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) 
+  REFERENCES `tbl_equivalent_course` (`eq_course_alpha`, `eq_course_num`) 
+  ON DELETE NO ACTION 
+  ON UPDATE NO ACTION) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -142,7 +153,12 @@ CREATE TABLE IF NOT EXISTS `tbl_or_equivalent` (
 CREATE TABLE IF NOT EXISTS `tbl_regular_staff` (
   `user_id` varchar(8) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblRegular_Staff_tblStaff` 
+  FOREIGN KEY (`user_id`) 
+  REFERENCES `tbl_staff` (`user_id`) 
+  ON DELETE CASCADE 
+  ON UPDATE CASCADE) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -157,7 +173,12 @@ CREATE TABLE IF NOT EXISTS `tbl_staff` (
   `user_name` varchar(10) NOT NULL,
   `password` varchar(15) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblStaff_tblUser` 
+  FOREIGN KEY (`user_id`) 
+  REFERENCES `tbl_user` (`user_id`) 
+  ON DELETE CASCADE 
+  ON UPDATE CASCADE) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -170,7 +191,12 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
   `major` varchar(100) NOT NULL DEFAULT 'undeclared',
   `term` varchar(6) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblStudent_tblUser` 
+  FOREIGN KEY (`user_id`) 
+  REFERENCES `tbl_user` (`user_id`) 
+  ON DELETE CASCADE 
+  ON UPDATE CASCADE) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -185,7 +211,12 @@ CREATE TABLE IF NOT EXISTS `tbl_transfers_in` (
   `transfer_inst_name` varchar(50) NOT NULL,
   `submission_time_stamp` datetime NOT NULL,
   PRIMARY KEY (`user_id`,`transfer_course_alpha`,`transfer_course_num`,`transfer_inst_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblTransfers_In_tblStudent` 
+  FOREIGN KEY (`user_id`) 
+  REFERENCES `tbl_student` (`user_id`) 
+  ON DELETE NO ACTION 
+  ON UPDATE NO ACTION) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -202,8 +233,12 @@ CREATE TABLE IF NOT EXISTS `tbl_transfer_course` (
   `effective_term` varchar(6) NOT NULL,
   `grp` char(1) DEFAULT NULL,
   PRIMARY KEY (`transfer_course_alpha`,`transfer_course_num`,`transfer_inst_name`),
-  KEY `fk_tblTransfer_Course_tblTransfers_In_idx` (`transfer_inst_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ADD CONSTRAINT `fk_tblTransfer_Course_tblTransfers_In` 
+  FOREIGN KEY (`transfer_inst_name`) 
+  REFERENCES `tbl_institution` (`institution_name`) 
+  ON DELETE NO ACTION 
+  ON UPDATE NO ACTION) 
+  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -220,71 +255,6 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `email` varchar(25) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tbl_administrator`
---
-ALTER TABLE `tbl_administrator`
-  ADD CONSTRAINT `fk_tblAdministrator_tblStaff` FOREIGN KEY (`user_id`) REFERENCES `tbl_staff` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_and_equivalent`
---
-ALTER TABLE `tbl_and_equivalent`
-  ADD CONSTRAINT `fk_tblAnd_Equivalent_tblEquivalent_Course` FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) REFERENCES `tbl_equivalent_course` (`eq_course_alpha`, `eq_course_num`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `tbl_approves`
---
-ALTER TABLE `tbl_approves`
-  ADD CONSTRAINT `fk_tblApproves_tblAdministrator` FOREIGN KEY (`user_id`) REFERENCES `tbl_administrator` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tblApproves_tblEquivalent_Course` FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) REFERENCES `tbl_equivalent_course` (`eq_course_alpha`, `eq_course_num`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `tbl_equivalent_course`
---
-ALTER TABLE `tbl_equivalent_course`
-  ADD CONSTRAINT `fk_tblEquivalent_Course_tblTransfer_Course` FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) REFERENCES `tbl_transfer_course` (`transfer_course_alpha`, `transfer_course_num`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `tbl_or_equivalent`
---
-ALTER TABLE `tbl_or_equivalent`
-  ADD CONSTRAINT `fk_tblOr_Equivalent_tblEquivalent_Course` FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) REFERENCES `tbl_equivalent_course` (`eq_course_alpha`, `eq_course_num`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `tbl_regular_staff`
---
-ALTER TABLE `tbl_regular_staff`
-  ADD CONSTRAINT `fk_tblRegular_Staff_tblStaff` FOREIGN KEY (`user_id`) REFERENCES `tbl_staff` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_staff`
---
-ALTER TABLE `tbl_staff`
-  ADD CONSTRAINT `fk_tblStaff_tblUser` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_student`
---
-ALTER TABLE `tbl_student`
-  ADD CONSTRAINT `fk_tblStudent_tblUser` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_transfers_in`
---
-ALTER TABLE `tbl_transfers_in`
-  ADD CONSTRAINT `fk_tblTransfers_In_tblStudent` FOREIGN KEY (`user_id`) REFERENCES `tbl_student` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `tbl_transfer_course`
---
-ALTER TABLE `tbl_transfer_course`
-  ADD CONSTRAINT `fk_tblTransfer_Course_tblTransfers_In` FOREIGN KEY (`transfer_inst_name`) REFERENCES `tbl_institution` (`institution_name`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
