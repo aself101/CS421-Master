@@ -35,7 +35,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `tbl_administrator` (
   `user_id` varchar(8) NOT NULL,
   `approval_flag` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
   ADD CONSTRAINT `fk_tblAdministrator_tblStaff` 
   FOREIGN KEY (`user_id`) 
   REFERENCES `tbl_staff` (`user_id`) ON DELETE CASCADE 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `tbl_and_equivalent` (
   `course_title` varchar(50) NOT NULL,
   `eq_hours` varchar(5) NOT NULL,
   `uhh_atr` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`eq_course_alpha`,`eq_course_num`)
+  PRIMARY KEY (`eq_course_alpha`,`eq_course_num`),
   ADD CONSTRAINT `fk_tblAnd_Equivalent_tblEquivalent_Course` 
   FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) 
   REFERENCES `tbl_equivalent_course` (`eq_course_alpha`, `eq_course_num`) 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `tbl_equivalent_course` (
   `uhh_atr` varchar(5) DEFAULT NULL,
   `date_updated` date NOT NULL,
   `pr` char(1) DEFAULT NULL,
-  PRIMARY KEY (`eq_course_alpha`,`eq_course_num`)
+  PRIMARY KEY (`eq_course_alpha`,`eq_course_num`),
   ADD CONSTRAINT `fk_tblEquivalent_Course_tblTransfer_Course` 
   FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) 
   REFERENCES `tbl_transfer_course` (`transfer_course_alpha`, `transfer_course_num`) 
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `tbl_or_equivalent` (
   `course_title` varchar(50) NOT NULL,
   `eq_hours` varchar(5) NOT NULL,
   `uhh_atr` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`eq_course_alpha`,`eq_course_num`)
+  PRIMARY KEY (`eq_course_alpha`,`eq_course_num`),
   ADD CONSTRAINT `fk_tblOr_Equivalent_tblEquivalent_Course` 
   FOREIGN KEY (`eq_course_alpha`, `eq_course_num`) 
   REFERENCES `tbl_equivalent_course` (`eq_course_alpha`, `eq_course_num`) 
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `tbl_or_equivalent` (
 
 CREATE TABLE IF NOT EXISTS `tbl_regular_staff` (
   `user_id` varchar(8) NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
   ADD CONSTRAINT `fk_tblRegular_Staff_tblStaff` 
   FOREIGN KEY (`user_id`) 
   REFERENCES `tbl_staff` (`user_id`) 
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `tbl_staff` (
   `position` varchar(50) NOT NULL,
   `user_name` varchar(10) NOT NULL,
   `password` varchar(15) NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
   ADD CONSTRAINT `fk_tblStaff_tblUser` 
   FOREIGN KEY (`user_id`) 
   REFERENCES `tbl_user` (`user_id`) 
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
   `user_id` varchar(8) NOT NULL,
   `major` varchar(100) NOT NULL DEFAULT 'undeclared',
   `term` varchar(6) NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
   ADD CONSTRAINT `fk_tblStudent_tblUser` 
   FOREIGN KEY (`user_id`) 
   REFERENCES `tbl_user` (`user_id`) 
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `tbl_transfers_in` (
   `transfer_course_num` varchar(6) NOT NULL,
   `transfer_inst_name` varchar(50) NOT NULL,
   `submission_time_stamp` datetime NOT NULL,
-  PRIMARY KEY (`user_id`,`transfer_course_alpha`,`transfer_course_num`,`transfer_inst_name`)
+  PRIMARY KEY (`user_id`,`transfer_course_alpha`,`transfer_course_num`,`transfer_inst_name`),
   ADD CONSTRAINT `fk_tblTransfers_In_tblStudent` 
   FOREIGN KEY (`user_id`) 
   REFERENCES `tbl_student` (`user_id`) 
