@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="Rails Proj_421: development" uuid="a2a42ce5-b087-48d2-983d-b3481be10661">
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1/Proj_421_development</jdbc-url>
+      <jdbc-url>jdbc:mysql://127.0.0.1/cs421-database-2.1</jdbc-url>
       <user-name>root</user-name>
       <libraries />
     </data-source>

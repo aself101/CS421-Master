@@ -11,7 +11,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: Proj_421_development
+  database: cs421-database-2.1
   pool: 5
   username: root
   password:
