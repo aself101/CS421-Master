@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
-
-  create_table "tbl_administrator", primary_key: "user_id", force: true do |t|
-    t.binary "approval_flag", limit: 1, default: "b'0'", null: false
-  end
+ActiveRecord::Schema.define(version: 20140406035916) do
 
   create_table "tbl_and_equivalent", id: false, force: true do |t|
     t.string "eq_course_alpha", limit: 6,  null: false
