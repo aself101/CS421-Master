@@ -34,13 +34,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `tbl_administrator` (
   `user_id` varchar(8) NOT NULL,
-  `approval_flag` enum('Y','N') NOT NULL DEFAULT 'Y',
+  `approval_flag` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`user_id`),
   CONSTRAINT `fk_tblAdministrator_tblStaff`
   FOREIGN KEY (`user_id`)
   REFERENCES `tbl_staff` (`user_id`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE) 
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION) 
   ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
