@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140406035916) do
+ActiveRecord::Schema.define(version: 0) do
+
+  create_table "tbl_administrator", primary_key: "user_id", force: true do |t|
+    t.binary "approval_flag", limit: 1, default: "b'0'", null: false
+  end
 
   create_table "tbl_and_equivalent", id: false, force: true do |t|
     t.string "eq_course_alpha", limit: 6,  null: false
@@ -28,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140406035916) do
     t.datetime "approval_time_stamp",           null: false
   end
 
-  add_index "tbl_approves", ["eq_course_alpha", "eq_course_num"], name: "fk_tblApproves_tblEquivalent_Course_idx", using: :btree
+  add_index "tbl_approves", ["eq_course_alpha", "eq_course_num"], name: "fk_tblApproves_tblEquivalent_Course", using: :btree
 
   create_table "tbl_equivalent_course", id: false, force: true do |t|
     t.string "eq_course_alpha", limit: 6,  null: false
@@ -81,7 +85,7 @@ ActiveRecord::Schema.define(version: 20140406035916) do
     t.string "grp",                   limit: 1
   end
 
-  add_index "tbl_transfer_course", ["transfer_inst_name"], name: "fk_tblTransfer_Course_tblTransfers_In_idx", using: :btree
+  add_index "tbl_transfer_course", ["transfer_inst_name"], name: "fk_tblTransfer_Course_tblTransfers_In", using: :btree
 
   create_table "tbl_transfers_in", id: false, force: true do |t|
     t.string   "user_id",               limit: 8,  null: false
