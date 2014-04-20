@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2014 at 06:56 AM
+-- Generation Time: Apr 20, 2014 at 07:46 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -57,6 +57,15 @@ CREATE TABLE IF NOT EXISTS `tbl_and_equivalent` (
   PRIMARY KEY (`eid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tbl_and_equivalent`
+--
+
+INSERT INTO `tbl_and_equivalent` (`eid`, `eq_course_alpha`, `eq_course_num`, `course_title`, `eq_hours`, `uhh_atr`) VALUES
+(5, 'SPAN', '102', 'Spanish II', '6', NULL),
+(6, 'AG', 'AG UPP', 'General UD AG Lab Substitution', '2.0', NULL),
+(7, 'JPSNE', '102', 'Elementary Japanese II', '8.0', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -72,6 +81,15 @@ CREATE TABLE IF NOT EXISTS `tbl_approves` (
   PRIMARY KEY (`aid`),
   UNIQUE KEY `fk_tblApproves_tblAdministrator` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_approves`
+--
+
+INSERT INTO `tbl_approves` (`aid`, `user_id`, `eq_course_alpha`, `eq_course_num`, `approval_time_stamp`) VALUES
+(1, '00000000', 'CHEM', '124', '2010-01-01 01:44:21'),
+(2, '48939764', 'JPNSE', '101', '2014-06-04 01:44:21'),
+(3, '00040020', 'MATH', '205', '2014-04-11 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -90,7 +108,20 @@ CREATE TABLE IF NOT EXISTS `tbl_equivalent_course` (
   `date_updated` date NOT NULL,
   `pr` char(1) DEFAULT NULL,
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `tbl_equivalent_course`
+--
+
+INSERT INTO `tbl_equivalent_course` (`eid`, `eq_course_alpha`, `eq_course_num`, `course_title`, `eq_hours`, `conn`, `uhh_atr`, `date_updated`, `pr`) VALUES
+(1, 'CHEM', '124', 'Gen Chemistry', '3.0', NULL, NULL, '2014-04-14', NULL),
+(2, 'JPNSE', '101', 'Elementary Japanese', '4.0', NULL, NULL, '2014-06-04', NULL),
+(3, 'MATH', '205', 'Calculus I', '4.0', NULL, NULL, '2014-04-11', NULL),
+(4, 'ENG', '252', 'Brit Lit: 1800 - Present', '3.0', NULL, NULL, '2013-04-12', NULL),
+(5, 'SPAN', '101', 'Spanish I ', '6', 'AND', NULL, '2003-03-03', NULL),
+(6, 'AG', 'AG UPP', 'Upper Division Agriculture', '2.0', 'AND', NULL, '2001-10-01', NULL),
+(7, 'JPSNE', '101', 'Elementary Japanese I ', '8.0', 'AND', NULL, '2003-04-15', NULL);
 
 -- --------------------------------------------------------
 
