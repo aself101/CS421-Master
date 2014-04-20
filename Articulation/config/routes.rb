@@ -1,4 +1,6 @@
 Articulation::Application.routes.draw do
+  get "pages/home"
+  get "pages/help"
   resources :logins
   resources :users
 
