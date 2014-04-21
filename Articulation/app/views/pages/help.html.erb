@@ -1,2 +1,15 @@
-<h1>University of Hawai'i t Hilo Help Page</h1>
-<p>Find me in app/views/pages/help.html.erb</p>
+<% provide(:title, 'Help') %> <!-- Gives page a title -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>University of Hawaii at Hilo | <%= yield(:title) %></title>
+</head>
+<body>
+<h1>University of Hawaii at Hilo Help Page</h1>
+<h2>Help</h2>
+<p>
+  Need help, google it!
+</p>
+</body>
+</html>
+
