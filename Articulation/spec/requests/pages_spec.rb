@@ -38,6 +38,20 @@ describe "Pages" do
       expect(page).to have_title("University of Hawaii at Hilo | About")
     end
   end
+
+  describe "Contact page" do
+
+    it "should have the content 'Contact'" do
+      visit '/pages/contact'
+      expect(page).to have_content('Contact')
+    end
+
+    it "should have the title 'Contact'" do
+      visit '/pages/contact'
+      expect(page).to have_title("University of Hawaii at Hilo | Contact")
+    end
+  end
+
 end
 
 
