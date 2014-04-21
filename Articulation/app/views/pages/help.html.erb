@@ -1,15 +1,10 @@
 <% provide(:title, 'Help') %> <!-- Gives page a title -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>University of Hawaii at Hilo | <%= yield(:title) %></title>
-</head>
-<body>
+
 <h1>University of Hawaii at Hilo Help Page</h1>
 <h2>Help</h2>
 <p>
-  Need help, google it!
+  Need help, google it!<br>
+  <%= link_to 'Home', pages_home_path %>
 </p>
-</body>
-</html>
+
 

@@ -1,17 +1,13 @@
 <% provide(:title, 'Home') %>   <!-- Gives page a title -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>University of Hawaii at Hilo | <%= yield(:title) %></title>
-</head>
-<body>
-    <h1>University of Hawaii at Hilo</h1>
-    <h2>Articulation Home Page</h2>
-        <p>
-          <%= link_to 'Form', new_user_path %><br>
-          <%= link_to 'Login', new_login_path %>
-        </p>
-</body>
-</html>
+<h1>University of Hawaii at Hilo</h1>
+<h2>Articulation Home Page</h2>
+    <p>
+      <%= link_to 'Form', new_user_path %><br>
+      <%= link_to 'Login', new_login_path %>
+    </p>
+    <p>
+      <%= link_to 'About', pages_about_path %>
+      <%= link_to 'Help', pages_help_path %>
+    </p>
 
 
