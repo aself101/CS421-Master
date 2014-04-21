@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2014 at 07:46 AM
+-- Generation Time: Apr 21, 2014 at 03:36 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -48,23 +48,14 @@ INSERT INTO `tbl_administrator` (`user_id`, `approval_flag`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_and_equivalent` (
-  `eid` int(10) NOT NULL,
-  `eq_course_alpha` varchar(6) NOT NULL,
-  `eq_course_num` varchar(6) NOT NULL,
+  `articulation_id` varchar(10) NOT NULL,
+  `eq_course_alpha` varchar(10) NOT NULL,
+  `eq_course_num` varchar(10) NOT NULL,
   `course_title` varchar(50) NOT NULL,
   `eq_hours` varchar(5) NOT NULL,
   `uhh_atr` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`eid`)
+  PRIMARY KEY (`articulation_id`,`eq_course_alpha`,`eq_course_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_and_equivalent`
---
-
-INSERT INTO `tbl_and_equivalent` (`eid`, `eq_course_alpha`, `eq_course_num`, `course_title`, `eq_hours`, `uhh_atr`) VALUES
-(5, 'SPAN', '102', 'Spanish II', '6', NULL),
-(6, 'AG', 'AG UPP', 'General UD AG Lab Substitution', '2.0', NULL),
-(7, 'JPSNE', '102', 'Elementary Japanese II', '8.0', NULL);
 
 -- --------------------------------------------------------
 
@@ -72,21 +63,22 @@ INSERT INTO `tbl_and_equivalent` (`eid`, `eq_course_alpha`, `eq_course_num`, `co
 -- Table structure for table `tbl_approves`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_approves` (  
+CREATE TABLE IF NOT EXISTS `tbl_approves` (
+  `approval_id` varchar(10) NOT NULL,
   `user_id` varchar(8) NOT NULL,
-  `approval_id` varchar(6) NOT NULL,
   `approval_time_stamp` datetime NOT NULL,
-  PRIMARY KEY (`user_id`,`approval_id`)  
+  PRIMARY KEY (`approval_id`,`user_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_approves`
 --
 
-INSERT INTO `tbl_approves` (`user_id`, `approval_id`, `approval_time_stamp`) VALUES
-('00000000', '0000000000', '2010-01-01 01:44:21'),
-('48939764', '0000000001', '2014-06-04 01:44:21'),
-('00040020', '0000000002', '2014-04-11 00:00:00');
+INSERT INTO `tbl_approves` (`approval_id`, `user_id`, `approval_time_stamp`) VALUES
+('0000000000', '00000000', '2010-01-01 01:44:21'),
+('0000000001', '48939764', '2014-06-04 01:44:21'),
+('0000000002', '00040020', '2014-04-11 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -95,31 +87,26 @@ INSERT INTO `tbl_approves` (`user_id`, `approval_id`, `approval_time_stamp`) VAL
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_equivalent_course` (
-  `course_id` varchar(10),
+  `approval_id` varchar(10) NOT NULL DEFAULT '',
+  `transfer_id` varchar(10) NOT NULL,
   `eq_course_alpha` varchar(6) NOT NULL,
-  Foreign Key (`eq_course_alpha`) references tbl_approves(eq_course_alpha) ON DELETE    CASCADE ON UPDATE CASCADE,
   `eq_course_num` varchar(6) NOT NULL,
   `course_title` varchar(50) NOT NULL,
   `eq_hours` varchar(5) NOT NULL,
   `conn` enum('AND','OR') DEFAULT NULL,
   `uhh_atr` varchar(5) DEFAULT NULL,
-  `date_updated` date NOT NULL,
   `pr` char(1) DEFAULT NULL,
-  PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+  PRIMARY KEY (`approval_id`,`transfer_id`,`eq_course_alpha`,`eq_course_num`),
+  KEY `transfer_id` (`transfer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_equivalent_course`
 --
 
-INSERT INTO `tbl_equivalent_course` (`articulation_id`, `eq_course_alpha`, `eq_course_num`, `course_title`, `eq_hours`, `conn`, `uhh_atr`, `date_updated`, `pr`) VALUES
-(1, 'CHEM', '124', 'Gen Chemistry', '3.0', NULL, NULL, '2014-04-14', NULL),
-(2, 'JPNSE', '101', 'Elementary Japanese', '4.0', NULL, NULL, '2014-06-04', NULL),
-(3, 'MATH', '205', 'Calculus I', '4.0', NULL, NULL, '2014-04-11', NULL),
-(4, 'ENG', '252', 'Brit Lit: 1800 - Present', '3.0', NULL, NULL, '2013-04-12', NULL),
-(5, 'SPAN', '101', 'Spanish I ', '6', 'AND', NULL, '2003-03-03', NULL),
-(6, 'AG', 'AG UPP', 'Upper Division Agriculture', '2.0', 'AND', NULL, '2001-10-01', NULL),
-(7, 'JPSNE', '101', 'Elementary Japanese I ', '8.0', 'AND', NULL, '2003-04-15', NULL);
+INSERT INTO `tbl_equivalent_course` (`approval_id`, `transfer_id`, `eq_course_alpha`, `eq_course_num`, `course_title`, `eq_hours`, `conn`, `uhh_atr`, `pr`) VALUES
+('0000000000', '0000000000', 'CHEM', '124', 'Gen Chemistry', '3.0', NULL, NULL, NULL),
+('0000000001', '0000000001', 'JPNSE', '101', 'Elementary Japanese', '4.0', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -188,7 +175,7 @@ INSERT INTO `tbl_regular_staff` (`user_id`) VALUES
 CREATE TABLE IF NOT EXISTS `tbl_staff` (
   `user_id` varchar(8) NOT NULL,
   `department` varchar(50) NOT NULL,
-  `position` varchar(50) NOT NULL,
+  `position` enum('DEAN','CHAIR','DBA','REG STAFF') NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -197,10 +184,10 @@ CREATE TABLE IF NOT EXISTS `tbl_staff` (
 --
 
 INSERT INTO `tbl_staff` (`user_id`, `department`, `position`) VALUES
-('00000000', 'Physics', 'Chair'),
-('00040020', 'College of Arts and Sciences', 'Dean'),
+('00000000', 'Physics', 'CHAIR'),
+('00040020', 'College of Arts and Sciences', 'DEAN'),
 ('48939764', 'ITS', 'DBA'),
-('90903435', 'Financial Aid', 'Student Assistant');
+('90903435', 'Financial Aid', 'REG STAFF');
 
 -- --------------------------------------------------------
 
@@ -269,8 +256,9 @@ CREATE TABLE IF NOT EXISTS `tbl_transfer_course` (
   `transfer_hours` varchar(8) NOT NULL,
   `effective_term` varchar(6) NOT NULL,
   `grp` char(1) DEFAULT NULL,
-  PRIMARY KEY (`transfer_id`,`transfer_course_alpha`,`transfer_course_num`),
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`transfer_id`,`transfer_course_alpha`,`transfer_course_num`,`transfer_inst_name`),
+  KEY `transfer_inst_name` (`transfer_inst_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_transfer_course`
@@ -334,26 +322,26 @@ ALTER TABLE `tbl_administrator`
 -- Constraints for table `tbl_and_equivalent`
 --
 ALTER TABLE `tbl_and_equivalent`
-  ADD CONSTRAINT `tbl_and_equivalent_ibfk_1` FOREIGN KEY (`eid`) REFERENCES `tbl_equivalent_course` (`eid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_and_equivalent_ibfk_1` FOREIGN KEY (`articulation_id`) REFERENCES `tbl_equivalent_course` (`approval_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_approves`
 --
 ALTER TABLE `tbl_approves`
-  ADD CONSTRAINT `tbl_approves_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `tbl_administrator` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_approves_ibfk_1` FOREIGN KEY (`aid`) REFERENCES `tbl_equivalent_course` (`eid`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_approves_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_administrator` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_equivalent_course`
 --
 ALTER TABLE `tbl_equivalent_course`
-  ADD CONSTRAINT `tbl_equivalent_course_ibfk_1` FOREIGN KEY (`eid`) REFERENCES `tbl_transfer_course` (`tid`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_equivalent_course_ibfk_2` FOREIGN KEY (`transfer_id`) REFERENCES `tbl_transfer_course` (`transfer_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_equivalent_course_ibfk_1` FOREIGN KEY (`approval_id`) REFERENCES `tbl_approves` (`approval_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_or_equivalent`
 --
 ALTER TABLE `tbl_or_equivalent`
-  ADD CONSTRAINT `tbl_or_equivalent_ibfk_1` FOREIGN KEY (`eid`) REFERENCES `tbl_equivalent_course` (`eid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_or_equivalent_ibfk_1` FOREIGN KEY (`articulation_id`) REFERENCES `tbl_equivalent_course` (`approval_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_regular_staff`
@@ -377,7 +365,7 @@ ALTER TABLE `tbl_student`
 -- Constraints for table `tbl_transfers_in`
 --
 ALTER TABLE `tbl_transfers_in`
-  ADD CONSTRAINT `tbl_transfers_in_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_student` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_transfers_in_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_student` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_transfer_course`
