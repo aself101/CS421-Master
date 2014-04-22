@@ -1,8 +1,12 @@
 Articulation::Application.routes.draw do
+  root 'pages#home'
   get "pages/home"
   get "pages/help"
   get "pages/about"
   get "pages/contact"
+  match '/help', to: 'pages#help', via: 'get'
+  match '/about',   to: 'pages#about',   via: 'get'
+  match '/contact', to: 'pages#contact', via: 'get'
   resources :logins
   resources :users
 
@@ -10,7 +14,7 @@ Articulation::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
