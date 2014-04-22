@@ -1,14 +1,13 @@
 <% provide(:title, 'Home') %>   <!-- Gives page a title -->
-<h1>University of Hawaii at Hilo</h1>
+<div class="center hero-unit">
+
+  <h1>University of Hawaii at Hilo</h1>
 <h2>Articulation Home Page</h2>
     <p>
-      <%= link_to 'Form', new_user_path %><br>
-      <%= link_to 'Login', new_login_path %>
+      <%= link_to 'Form', new_user_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "About", pages_about_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "Help", pages_help_path, class: "btn btn-large btn-primary" %>
+      <%= link_to "Contact", pages_contact_path, class: "btn btn-large btn-primary" %>
     </p>
-    <p>
-      <%= link_to 'About', pages_about_path %>
-      <%= link_to 'Help', pages_help_path %>
-      <%= link_to 'Contact', pages_contact_path %><br>
-    </p>
-
-
+</div>
+<%= link_to image_tag("uhHilo.jpg", alt: "UHH"), 'http://uhh.hawaii.edu/' %>
