@@ -5,27 +5,14 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+  <%= render 'layouts/shim' %>
 </head>
 <body>
-<header class="navbar navbar-fixed-top navbar-inverse"><!--Go at top of page -->
-  <div class="navbar-inner">
+    <%= render 'layouts/header' %>
+    <%= link_to image_tag("uhHilo.jpg", alt: "UHH"), 'http://uhh.hawaii.edu/' %>
     <div class="container">
-      <%= link_to "sample app", '#', id: "logo" %>
-      <nav>
-        <ul class="nav pull-right">
-          <li><%= link_to "Home",    pages_home_path %></li>
-          <li><%= link_to "Help",    pages_help_path %></li>
-          <li><%= link_to "Sign in", new_login_path %></li>
-        </ul>
-      </nav>
+        <%= yield %>
+      <%= render 'layouts/footer' %>
     </div>
-  </div>
-</header>
-<div class="container">
-  <%= yield %>
-</div>
 </body>
 </html>
