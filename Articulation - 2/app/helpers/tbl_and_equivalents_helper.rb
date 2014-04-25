@@ -1,0 +1,2 @@
+module TblAndEquivalentsHelper
+end
