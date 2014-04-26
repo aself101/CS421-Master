@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425041344) do
+ActiveRecord::Schema.define(version: 20140426001240) do
 
   create_table "logins", force: true do |t|
     t.string   "user_id"
@@ -23,15 +23,6 @@ ActiveRecord::Schema.define(version: 20140425041344) do
 
   create_table "tbl_administrator", primary_key: "user_id", force: true do |t|
     t.binary "approval_flag", limit: 1, default: "b'0'", null: false
-  end
-
-  create_table "tbl_and_equivalent", id: false, force: true do |t|
-    t.string "articulation_id", limit: 10, null: false
-    t.string "eq_course_alpha", limit: 10, null: false
-    t.string "eq_course_num",   limit: 10, null: false
-    t.string "course_title",    limit: 50, null: false
-    t.string "eq_hours",        limit: 5,  null: false
-    t.string "uhh_atr",         limit: 5
   end
 
   create_table "tbl_and_equivalents", force: true do |t|
@@ -52,19 +43,21 @@ ActiveRecord::Schema.define(version: 20140425041344) do
 
   add_index "tbl_approves", ["user_id"], name: "user_id", using: :btree
 
-  create_table "tbl_equivalent_course", id: false, force: true do |t|
-    t.string "approval_id",     limit: 10, default: "", null: false
-    t.string "transfer_id",     limit: 10,              null: false
-    t.string "eq_course_alpha", limit: 6,               null: false
-    t.string "eq_course_num",   limit: 6,               null: false
-    t.string "course_title",    limit: 50,              null: false
-    t.string "eq_hours",        limit: 5,               null: false
-    t.string "conn",            limit: 3
-    t.string "uhh_atr",         limit: 5
-    t.string "pr",              limit: 1
-  end
-
   add_index "tbl_equivalent_course", ["transfer_id"], name: "transfer_id", using: :btree
+
+  create_table "tbl_equivalent_courses", id:false, force: true do |t|
+    t.string   "approval_id",     limit: 10, default: "", null: false
+    t.string   "transfer_id",     limit: 10,              null: false
+    t.string   "eq_course_alpha", limit: 6,               null: false
+    t.string   "eq_course_num",   limit: 6,               null: false
+    t.string   "course_title",    limit: 50,              null: false
+    t.string   "eq_hours",        limit: 5,               null: false
+    t.string   "conn",            limit: 3
+    t.string   "uhh_atr",         limit: 5
+    t.string   "pr",              limit: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tbl_institution", primary_key: "institution_name", force: true do |t|
     t.string "city",    limit: 60,  null: false
@@ -118,15 +111,7 @@ ActiveRecord::Schema.define(version: 20140425041344) do
 
   add_index "tbl_transfers_in", ["transfer_inst_name"], name: "transfer_inst_name", using: :btree
 
-  create_table "tbl_user", primary_key: "user_id", force: true do |t|
-    t.string "first_name",      limit: 50, null: false
-    t.string "middle_initital", limit: 1
-    t.string "last_name",       limit: 50, null: false
-    t.string "phone",           limit: 10, null: false
-    t.string "email",           limit: 25, null: false
-  end
-
-  create_table "tbl_users", force: true do |t|
+  create_table "tbl_users", primary_key: "user_id", force: true do |t|
     t.string   "first_name",      limit: 50, null: false
     t.string   "middle_initital", limit: 1
     t.string   "last_name",       limit: 50, null: false

@@ -1,4 +1,5 @@
 Articulation::Application.routes.draw do
+  get "tbl_equivalent_course/new"
   get "tbl_user/new"
   get "tbl_approves/new"
   get "tbl_and_equivalents/new"
