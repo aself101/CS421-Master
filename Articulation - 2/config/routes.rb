@@ -1,4 +1,11 @@
 Articulation::Application.routes.draw do
+  get "tbl_transfers_in/new"
+  get "tbl_transfer_course/new"
+  get "tbl_student/new"
+  get "tbl_staff/new"
+  get "tbl_or_equivalent/new"
+  get "tbl_institution/new"
+  get "tbl_administrator/new"
   get "tbl_equivalent_course/new"
   get "tbl_user/new"
   get "tbl_approves/new"
