@@ -4,23 +4,17 @@ describe "submissions/show" do
   before(:each) do
     @submission = assign(:submission, stub_model(Submission,
       :name => "Name",
-      :student_id => "Student",
+      :student_id_number => "Student Id Number",
       :classification => "Classification",
       :major => "Major",
       :address => "Address",
       :email => "Email",
       :phone => "Phone",
-      :transfer institution => "Transfer Institution",
-      : => "",
+      :transfer_institution => "Transfer Institution",
       :term => "Term",
-      :course alpha => "Course Alpha",
-      : => "",
-      :course number => "Course Number",
-      : => "",
-      :course hours => "Course Hours",
-      : => 1,
-      :uh hilo equivalent => "Uh Hilo Equivalent",
-      : => ""
+      :course_alpha => "Course Alpha",
+      :course_number => "Course Number",
+      :course_hours => 1
     ))
   end
 
@@ -28,22 +22,16 @@ describe "submissions/show" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Name/)
-    rendered.should match(/Student/)
+    rendered.should match(/Student Id Number/)
     rendered.should match(/Classification/)
     rendered.should match(/Major/)
     rendered.should match(/Address/)
     rendered.should match(/Email/)
     rendered.should match(/Phone/)
     rendered.should match(/Transfer Institution/)
-    rendered.should match(//)
     rendered.should match(/Term/)
     rendered.should match(/Course Alpha/)
-    rendered.should match(//)
     rendered.should match(/Course Number/)
-    rendered.should match(//)
-    rendered.should match(/Course Hours/)
     rendered.should match(/1/)
-    rendered.should match(/Uh Hilo Equivalent/)
-    rendered.should match(//)
   end
 end

@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Student:</strong>
-  <%= @submission.student_identification_number %>
+  <strong>Student id number:</strong>
+  <%= @submission.student_id_number %>
 </p>
 
 <p>
@@ -58,11 +58,6 @@
 <p>
   <strong>Course hours:</strong>
   <%= @submission.course_hours %>
-</p>
-
-<p>
-  <strong>Uh Hilo Equivalent:</strong>
-  <%= @submission.uh_hilo_equivalent %>
 </p>
 
 <%= link_to 'Edit', edit_submission_path(@submission) %> |

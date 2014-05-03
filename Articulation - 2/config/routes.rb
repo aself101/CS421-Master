@@ -1,5 +1,7 @@
 Articulation::Application.routes.draw do
   resources :submissions
+  resources :logins
+  resources :users
 
   get "tbl_transfers_in/new"
   get "tbl_transfer_course/new"
@@ -20,8 +22,7 @@ Articulation::Application.routes.draw do
   match '/help', to: 'pages#help', via: 'get'
   match '/about',   to: 'pages#about',   via: 'get'
   match '/contact', to: 'pages#contact', via: 'get'
-  resources :logins
-  resources :users
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

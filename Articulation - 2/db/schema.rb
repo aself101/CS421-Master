@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140429214717) do
+ActiveRecord::Schema.define(version: 20140503201358) do
 
   create_table "logins", primary_key: "user_id", force: true do |t|
     t.string   "email"
@@ -20,19 +20,18 @@ ActiveRecord::Schema.define(version: 20140429214717) do
     t.datetime "updated_at"
   end
 
-  create_table "submissions", primary_key: "student_identification_number", force: true do |t|
-    t.string   "name"
-    t.string   "classification"
-    t.string   "major",                limit: 100, default: "undeclared", null: false
-    t.string   "address",              limit: 100,                        null: false
-    t.string   "email"
-    t.string   "phone"
-    t.string   "transfer_institution", limit: 60,                         null: false
-    t.string   "term",                 limit: 6,                          null: false
-    t.string   "course_alpha"
-    t.string   "course_number"
-    t.string   "course_hours"
-    t.string   "uh_hilo_equivalent"
+  create_table "submissions", primary_key: "student_id_number", force: true do |t|
+    t.string   "name",                 limit: 75,                        null: false
+    t.string   "classification",                                         null: false
+    t.string   "major",                limit: 20, default: "Undeclared", null: false
+    t.string   "address",              limit: 75,                        null: false
+    t.string   "email",                limit: 30,                        null: false
+    t.string   "phone",                limit: 12,                        null: false
+    t.string   "transfer_institution", limit: 50,                        null: false
+    t.string   "term",                                                   null: false
+    t.string   "course_alpha",                                           null: false
+    t.string   "course_number",        limit: 5,                         null: false
+    t.integer  "course_hours",         limit: 2,                         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -213,19 +212,6 @@ ActiveRecord::Schema.define(version: 20140429214717) do
     t.string   "last_name",      limit: 50, null: false
     t.string   "phone",          limit: 10, null: false
     t.string   "email",          limit: 25, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "first_name"
-    t.string   "middle_initial"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "major"
-    t.string   "term"
-    t.integer  "year"
-    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

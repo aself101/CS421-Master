@@ -16,10 +16,9 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :student_identification_number %><br>
-    <%= f.text_field :student_identification_number %>
+    <%= f.label :student_id_number %><br>
+    <%= f.text_field :student_id_number %>
   </div>
-
   <div class="field">
     <%= f.label :classification %><br>
     <%= f.select :classification, [['FR'], ['SO'],['JR'],['SR']] %> <!--Drop down list -->
@@ -27,13 +26,13 @@
   <div class="field">
     <%= f.label :major %><br>
     <%= f.select :major, [ ['Administration of Justice'], ['Agriculture'],['Anthropology'],['Art'],
-                          ['Astronomy'], ['Biology'],['Business Administration'],['Chemistry'],
-                          ['Communication'], ['Computer Science'],['Economics'],['English'],
-                          ['Environmental Studies'], ['Geography'],['Geology'],['Hawaiian Studies'],
-                          ['History'], ['Japanese Studies'],['Kinesiology and Exercise Sciences'],['Liberal Studies'],
-                          ['Linguistics'], ['Marine Science'],['Mathematics'],['Natural Science'],
-                          ['Nursing'], ['Performance Arts'],['Pharmacy Studies'],['Philosophy'],
-                          ['Physics'], ['Political Science'],['Psychology'],['Sociology'] ] %>
+                             ['Astronomy'], ['Biology'],['Business Administration'],['Chemistry'],
+                             ['Communication'], ['Computer Science'],['Economics'],['English'],
+                             ['Environmental Studies'], ['Geography'],['Geology'],['Hawaiian Studies'],
+                             ['History'], ['Japanese Studies'],['Kinesiology and Exercise Sciences'],['Liberal Studies'],
+                             ['Linguistics'], ['Marine Science'],['Mathematics'],['Natural Science'],
+                             ['Nursing'], ['Performance Arts'],['Pharmacy Studies'],['Philosophy'],
+                             ['Physics'], ['Political Science'],['Psychology'],['Sociology'] ] %>
   </div>
   <div class="field">
     <%= f.label :address %><br>
@@ -58,8 +57,7 @@
   <div class="field">
     <%= f.label :course_alpha %><br>
     <%= f.select :course_alpha, [ ['ACC'],['AJ'],['AGBU'],['AG'],['ANTH'],['ART'],['ASTR'],['BIOL'],['BUS'],['CHEM'],
-                                  ['CHNS'],['COM'],['CS'],['DNCE'],['DRAM'],['ECOM'],['ED'],['KED'],['ENG'],['ESL'],
-                                  ['ENTO'],['ENSC'],['FIL'],['FIN'],['FOR'],['GEOG'],['GEOL'],['HAW'],['KHAW'],['HWST'],
+                                  ['CHNS'],['COM'],['CS'],['DNCE'],['DRAM'],['ECOM'],['ED'],['KED'],['ENG'],['ESL'],                                    ['ENTO'],['ENSC'],['FIL'],['FIN'],['FOR'],['GEOG'],['GEOL'],['HAW'],['KHAW'],['HWST'],
                                   ['KHWS'],['HIST'],['HON'],['HORT'],['IS'],['JPNS'],['JPST'],['KES'],['LANG'],['LING'],
                                   ['MGT'],['MARE'],['MKT'],['MATH'],['MSL'],['MUS'],['NRES'],['NURS'],['PHPS'],['PHPP'],
                                   ['PHIL'],['PHYS'],['PPTH'],['PPHY'],['POLS'],['PSY'],['QBA'],['SOC'],['SOIL'],['SPAN'],
@@ -71,13 +69,8 @@
   </div>
   <div class="field">
     <%= f.label :course_hours %><br>
-    <%= f.text_field :course_hours %>
+    <%= f.number_field :course_hours %>
   </div>
-  <div class="field">
-    <%= f.label :uh_hilo_equivalent %><br>
-    <%= f.text_field :uh_hilo_equivalent %>
-  </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>

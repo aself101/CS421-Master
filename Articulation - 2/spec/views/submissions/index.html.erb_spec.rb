@@ -5,43 +5,31 @@ describe "submissions/index" do
     assign(:submissions, [
       stub_model(Submission,
         :name => "Name",
-        :student_id => "Student",
+        :student_id_number => "Student Id Number",
         :classification => "Classification",
         :major => "Major",
         :address => "Address",
         :email => "Email",
         :phone => "Phone",
-        :transfer institution => "Transfer Institution",
-        : => "",
+        :transfer_institution => "Transfer Institution",
         :term => "Term",
-        :course alpha => "Course Alpha",
-        : => "",
-        :course number => "Course Number",
-        : => "",
-        :course hours => "Course Hours",
-        : => 1,
-        :uh hilo equivalent => "Uh Hilo Equivalent",
-        : => ""
+        :course_alpha => "Course Alpha",
+        :course_number => "Course Number",
+        :course_hours => 1
       ),
       stub_model(Submission,
         :name => "Name",
-        :student_id => "Student",
+        :student_id_number => "Student Id Number",
         :classification => "Classification",
         :major => "Major",
         :address => "Address",
         :email => "Email",
         :phone => "Phone",
-        :transfer institution => "Transfer Institution",
-        : => "",
+        :transfer_institution => "Transfer Institution",
         :term => "Term",
-        :course alpha => "Course Alpha",
-        : => "",
-        :course number => "Course Number",
-        : => "",
-        :course hours => "Course Hours",
-        : => 1,
-        :uh hilo equivalent => "Uh Hilo Equivalent",
-        : => ""
+        :course_alpha => "Course Alpha",
+        :course_number => "Course Number",
+        :course_hours => 1
       )
     ])
   end
@@ -50,22 +38,16 @@ describe "submissions/index" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => "Name".to_s, :count => 2
-    assert_select "tr>td", :text => "Student".to_s, :count => 2
+    assert_select "tr>td", :text => "Student Id Number".to_s, :count => 2
     assert_select "tr>td", :text => "Classification".to_s, :count => 2
     assert_select "tr>td", :text => "Major".to_s, :count => 2
     assert_select "tr>td", :text => "Address".to_s, :count => 2
     assert_select "tr>td", :text => "Email".to_s, :count => 2
     assert_select "tr>td", :text => "Phone".to_s, :count => 2
     assert_select "tr>td", :text => "Transfer Institution".to_s, :count => 2
-    assert_select "tr>td", :text => "".to_s, :count => 2
     assert_select "tr>td", :text => "Term".to_s, :count => 2
     assert_select "tr>td", :text => "Course Alpha".to_s, :count => 2
-    assert_select "tr>td", :text => "".to_s, :count => 2
     assert_select "tr>td", :text => "Course Number".to_s, :count => 2
-    assert_select "tr>td", :text => "".to_s, :count => 2
-    assert_select "tr>td", :text => "Course Hours".to_s, :count => 2
     assert_select "tr>td", :text => 1.to_s, :count => 2
-    assert_select "tr>td", :text => "Uh Hilo Equivalent".to_s, :count => 2
-    assert_select "tr>td", :text => "".to_s, :count => 2
   end
 end

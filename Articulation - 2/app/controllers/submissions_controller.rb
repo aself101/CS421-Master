@@ -6,6 +6,7 @@ class SubmissionsController < ApplicationController
   def index
     @submissions = Submission.all
   end
+
   # GET /submissions/1
   # GET /submissions/1.json
   def show
@@ -14,7 +15,6 @@ class SubmissionsController < ApplicationController
   # GET /submissions/new
   def new
     @submission = Submission.new
-  #  @uh_hilo_equivalent = TblEquivalentCourse.find(:all) #hopefully populate with course equiv
   end
 
   # GET /submissions/1/edit
@@ -69,6 +69,6 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:name, :student_identification_number, :classification, :major, :address, :email, :phone, :transfer_institution, :term, :course_alpha, :course_number, :course_hours, :uh_hilo_equivalent)
+      params.require(:submission).permit(:name, :student_id_number, :classification, :major, :address, :email, :phone, :transfer_institution, :term, :course_alpha, :course_number, :course_hours)
     end
 end
