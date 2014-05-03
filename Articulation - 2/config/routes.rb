@@ -1,4 +1,6 @@
 Articulation::Application.routes.draw do
+  resources :submissions
+
   get "tbl_transfers_in/new"
   get "tbl_transfer_course/new"
   get "tbl_student/new"

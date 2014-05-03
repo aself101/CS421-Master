@@ -1,0 +1,56 @@
+<h1>Listing submissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Student ID</th>
+      <th>Classification</th>
+      <th>Major</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Transfer institution</th>
+      <th></th>
+      <th>Term</th>
+      <th>Course alpha</th>
+      <th></th>
+      <th>Course number</th>
+      <th></th>
+      <th>Course hours</th>
+      <th></th>
+      <th>Uh hilo equivalent</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <tr>
+        <td><%= submission.name %></td>
+        <td><%= submission.student_identification_number %></td>
+        <td><%= submission.classification %></td>
+        <td><%= submission.major %></td>
+        <td><%= submission.address %></td>
+        <td><%= submission.email %></td>
+        <td><%= submission.phone %></td>
+        <td><%= submission.transfer_institution %></td>
+        <td><%= submission.term %></td>
+        <td><%= submission.course_alpha %></td>
+        <td><%= submission.course_number %></td>
+        <td><%= submission.course_hours %></td>
+        <td><%= submission.uh_hilo_equivalent %></td>
+        <td><%= link_to 'Show', submission %></td>
+        <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
+        <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Submission', new_submission_path %>

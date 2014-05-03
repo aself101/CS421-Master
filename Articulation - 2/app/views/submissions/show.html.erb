@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @submission.name %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @submission.student_identification_number %>
+</p>
+
+<p>
+  <strong>Classification:</strong>
+  <%= @submission.classification %>
+</p>
+
+<p>
+  <strong>Major:</strong>
+  <%= @submission.major %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @submission.address %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @submission.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @submission.phone %>
+</p>
+
+<p>
+  <strong>Transfer institution:</strong>
+  <%= @submission.transfer_institution %>
+</p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @submission.term %>
+</p>
+
+<p>
+  <strong>Course alpha:</strong>
+  <%= @submission.course_alpha %>
+</p>
+
+<p>
+  <strong>Course number:</strong>
+  <%= @submission.course_number %>
+</p>
+
+<p>
+  <strong>Course hours:</strong>
+  <%= @submission.course_hours %>
+</p>
+
+<p>
+  <strong>Uh Hilo Equivalent:</strong>
+  <%= @submission.uh_hilo_equivalent %>
+</p>
+
+<%= link_to 'Edit', edit_submission_path(@submission) %> |
+<%= link_to 'Back', submissions_path %>

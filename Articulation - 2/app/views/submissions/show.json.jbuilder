@@ -1,0 +1,1 @@
+json.extract! @submission, :id, :name, :student_id, :classification, :major, :address, :email, :phone, :transfer institution, :, :term, :course alpha, :, :course number, :, :course hours, :, :uh hilo equivalent, :, :created_at, :updated_at

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427220050) do
+ActiveRecord::Schema.define(version: 20140429214717) do
 
   create_table "logins", primary_key: "user_id", force: true do |t|
     t.string   "email"
@@ -20,8 +20,24 @@ ActiveRecord::Schema.define(version: 20140427220050) do
     t.datetime "updated_at"
   end
 
+  create_table "submissions", primary_key: "student_identification_number", force: true do |t|
+    t.string   "name"
+    t.string   "classification"
+    t.string   "major",                limit: 100, default: "undeclared", null: false
+    t.string   "address",              limit: 100,                        null: false
+    t.string   "email"
+    t.string   "phone"
+    t.string   "transfer_institution", limit: 60,                         null: false
+    t.string   "term",                 limit: 6,                          null: false
+    t.string   "course_alpha"
+    t.string   "course_number"
+    t.string   "course_hours"
+    t.string   "uh_hilo_equivalent"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tbl_administrator", primary_key: "user_id", force: true do |t|
-    t.binary "approval_flag", limit: 1, default: "b'0'", null: false
   end
 
   create_table "tbl_administrators", primary_key: "user_id", force: true do |t|
