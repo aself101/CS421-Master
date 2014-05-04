@@ -2,6 +2,8 @@ Articulation::Application.routes.draw do
   resources :submissions
   resources :logins
   resources :users
+  resources :pages
+  root 'pages#home'
 
   get "tbl_transfers_in/new"
   get "tbl_transfer_course/new"
@@ -14,11 +16,12 @@ Articulation::Application.routes.draw do
   get "tbl_user/new"
   get "tbl_approves/new"
   get "tbl_and_equivalents/new"
-  root 'pages#home'
+
   get "pages/home"
   get "pages/help"
   get "pages/about"
   get "pages/contact"
+
   match '/help', to: 'pages#help', via: 'get'
   match '/about',   to: 'pages#about',   via: 'get'
   match '/contact', to: 'pages#contact', via: 'get'
