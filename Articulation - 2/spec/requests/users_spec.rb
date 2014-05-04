@@ -17,7 +17,9 @@ describe "Users" do
           expect { click_button submit }.not_to change(User, :count)
         end
       end
-
+      it { should respond_to(:password_confirmation) }
+      it { should respond_to(:remember_token) }
+      it { should respond_to(:authenticate) }
       describe "with valid information" do
         before do
           fill_in "Name",         with: "Example User"

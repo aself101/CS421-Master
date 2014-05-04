@@ -2,8 +2,12 @@ Articulation::Application.routes.draw do
   resources :submissions
   resources :logins
   resources :users
-  #resources :pages
+  resources :sessions, only: [:new, :create, :destroy]
   root 'pages#home'
+
+  match '/signup',  to: 'users#new',            via: 'get'
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
 
   get "tbl_transfers_in/new"
   get "tbl_transfer_course/new"
