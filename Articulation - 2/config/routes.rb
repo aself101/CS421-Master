@@ -2,7 +2,7 @@ Articulation::Application.routes.draw do
   resources :submissions
   resources :logins
   resources :users
-  resources :pages
+  #resources :pages
   root 'pages#home'
 
   get "tbl_transfers_in/new"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504003039) do
+ActiveRecord::Schema.define(version: 20140504015859) do
 
   create_table "logins", primary_key: "user_id", force: true do |t|
     t.string   "email"
@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 20140504003039) do
     t.string   "password_confirmation", limit: 25, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
 end
