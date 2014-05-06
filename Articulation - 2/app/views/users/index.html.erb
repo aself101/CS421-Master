@@ -1,13 +1,12 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 
+<%= will_paginate %>
+
 <ul class="users">
-  <% @users.each do |user| %>
-      <li>
-        <%= link_to user.first_name, user %>
-      </li>
-  <% end %>
+  <%= render @users %>
 </ul>
 
+<%= will_paginate %>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'Student Submissions', submissions_path, class: "btn btn-large btn-primary" %>

@@ -22,7 +22,7 @@
   </thead>
 
   <tbody>
-    <% @submissions.each do |submission| %>
+    <% @submissions.each do |submission, user| %>
       <tr>
         <td><%= submission.name %></td>
         <td><%= submission.student_id_number %></td>
@@ -41,9 +41,10 @@
         <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Submission', new_submission_path %>
+
