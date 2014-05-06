@@ -40,6 +40,7 @@
   <strong>Password confirmation:</strong>
   <%= @user.password_confirmation %>
 </p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if signed_in? && current_user.admin?%>
+    <%= link_to 'Back', users_path %>
+<% end %>|
+<%= link_to 'Edit', edit_user_path(@user) %>

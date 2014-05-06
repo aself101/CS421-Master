@@ -1,0 +1,35 @@
+<h1>Listing Institutions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Institution name</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Website</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tbl_institutions.each do |tbl_institution| %>
+      <tr>
+        <td><%= tbl_institution.institution_name %></td>
+        <td><%= tbl_institution.city %></td>
+        <td><%= tbl_institution.state %></td>
+        <td><%= tbl_institution.zip %></td>
+        <td><%= tbl_institution.website %></td>
+        <td><%= link_to 'Show', tbl_institution %></td>
+        <td><%= link_to 'Edit', edit_tbl_institution_path(tbl_institution) %></td>
+        <td><%= link_to 'Destroy', tbl_institution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add Institution', new_tbl_institution_path, class: "btn btn-large btn-primary" %>

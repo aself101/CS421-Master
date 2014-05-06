@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506055911) do
+ActiveRecord::Schema.define(version: 20140506074018) do
 
   create_table "logins", primary_key: "user_id", force: true do |t|
     t.string   "email"

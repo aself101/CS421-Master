@@ -1,8 +1,11 @@
 Articulation::Application.routes.draw do
+  resources :tbl_institutions
+
   resources :submissions
   resources :logins
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :tbl_institutions
   root 'pages#home'
 
   match '/signup',  to: 'users#new',            via: 'get'
@@ -14,7 +17,6 @@ Articulation::Application.routes.draw do
   get "tbl_student/new"
   get "tbl_staff/new"
   get "tbl_or_equivalent/new"
-  get "tbl_institution/index"
   get "tbl_administrator/new"
   get "tbl_equivalent_course/new"
   get "tbl_user/new"

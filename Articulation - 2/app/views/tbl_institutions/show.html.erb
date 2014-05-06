@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Institution name:</strong>
+  <%= @tbl_institution.institution_name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @tbl_institution.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @tbl_institution.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @tbl_institution.zip %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @tbl_institution.website %>
+</p>
+
+<%= link_to 'Edit', edit_tbl_institution_path(@tbl_institution) %> |
+<%= link_to 'Back', tbl_institutions_path %>
