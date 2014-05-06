@@ -5,8 +5,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :middle_initial,         limit: 1
       t.string :last_name,              limit: 50, null: false
       t.string :email,                  limit: 25, null: false
-      t.string :password,               limit: 25, null: false
-      t.string :password_confirmation,  limit: 25, null: false
+      t.string :password,               limit: 25, default: "", null: false
+      t.string :password_confirmation,  limit: 25, default: "", null: false
 
       t.timestamps
     end

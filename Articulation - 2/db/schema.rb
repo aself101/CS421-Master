@@ -217,12 +217,12 @@ ActiveRecord::Schema.define(version: 20140504060330) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "first_name",            limit: 50, null: false
+    t.string   "first_name",            limit: 50,                  null: false
     t.string   "middle_initial",        limit: 1
-    t.string   "last_name",             limit: 50, null: false
-    t.string   "email",                 limit: 25, null: false
-    t.string   "password",              limit: 25, null: false
-    t.string   "password_confirmation", limit: 25, null: false
+    t.string   "last_name",             limit: 50,                  null: false
+    t.string   "email",                 limit: 25,                  null: false
+    t.string   "password",              limit: 25, default: "\"\"", null: false
+    t.string   "password_confirmation", limit: 25, default: "\"\"", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
