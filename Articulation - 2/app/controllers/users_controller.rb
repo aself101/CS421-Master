@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :signed_in_user, only: [:index, :edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
   # GET /users
   # GET /users.json
   def index
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -43,6 +45,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      @user = User.find(params[:id])
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
@@ -73,4 +76,17 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:first_name, :middle_initial, :last_name , :email, :password, :password_confirmation)
     end
+    # Before filter, called before a given action, like trying to access given material
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
+    #ensures only correct users can access the correct info.
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
 end

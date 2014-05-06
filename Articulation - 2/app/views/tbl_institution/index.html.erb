@@ -1,0 +1,30 @@
+<% provide(:title, 'All Institutions') %>
+<h1>All Institutions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Institution Name</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Website</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @TblInstitution.each do |tblInstitution| %>
+      <tr>
+        <td><%= tblInstitution.institution_name %></td>
+        <td><%= tblInstitution.city %></td>
+        <td><%= tblInstitution.state %></td>
+        <td><%= tblInstitution.zip %></td>
+        <td><%= tblInstitution.website %></td>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+

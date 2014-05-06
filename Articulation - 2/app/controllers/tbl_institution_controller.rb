@@ -2,6 +2,10 @@ class TblInstitutionController < ApplicationController
   def new
     @TblInstitution = :institution_name, :city, :state, :zip, :website
   end
+
+  def index
+    @TblInstitution = TblInstitution.all
+  end
   attr_accessor
   #initializing an array of attributes
   def initialize(attributes = {})

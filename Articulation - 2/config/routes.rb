@@ -14,7 +14,7 @@ Articulation::Application.routes.draw do
   get "tbl_student/new"
   get "tbl_staff/new"
   get "tbl_or_equivalent/new"
-  get "tbl_institution/new"
+  get "tbl_institution/index"
   get "tbl_administrator/new"
   get "tbl_equivalent_course/new"
   get "tbl_user/new"
