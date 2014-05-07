@@ -3,11 +3,11 @@
 <table>
   <thead>
     <tr>
-      <th>Institution name</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
-      <th>Website</th>
+      <th>Institution name | </th>
+      <th>City | </th>
+      <th>State | </th>
+      <th>Zip | </th>
+      <th>Website | </th>
       <th></th>
       <th></th>
       <th></th>
@@ -32,4 +32,7 @@
 
 <br>
 
-<%= link_to 'Add Institution', new_tbl_institution_path, class: "btn btn-large btn-primary" %>
+<%= link_to 'Add Institution', new_tbl_institution_path, class: "btn btn-medium btn-primary" %>
+| <% if signed_in? && current_user.admin?%>
+    <%= link_to 'Back', users_path %>
+<% end %>

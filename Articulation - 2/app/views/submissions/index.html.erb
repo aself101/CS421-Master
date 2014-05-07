@@ -45,6 +45,9 @@
   </tbody>
 </table>
 
+<% if signed_in? && current_user.admin?%>
+    <%= link_to 'Back', users_path %>
+<% end %>
 <br>
 
 

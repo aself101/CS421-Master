@@ -1,0 +1,2 @@
+module TblTransferCoursesHelper
+end

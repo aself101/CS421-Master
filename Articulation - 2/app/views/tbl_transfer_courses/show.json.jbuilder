@@ -1,0 +1,1 @@
+json.extract! @tbl_transfer_course, :id, :transferID, :transfer_course_alpha, :transfer_course_num, :course_title, :transfer_inst_name, :transfer_hours, :effective_term, :grp, :created_at, :updated_at

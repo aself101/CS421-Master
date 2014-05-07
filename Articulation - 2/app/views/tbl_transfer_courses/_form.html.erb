@@ -1,0 +1,49 @@
+<%= form_for(@tbl_transfer_course) do |f| %>
+  <% if @tbl_transfer_course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tbl_transfer_course.errors.count, "error") %> prohibited this tbl_transfer_course from being saved:</h2>
+
+      <ul>
+      <% @tbl_transfer_course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :transferID %><br>
+    <%= f.text_field :transferID %>
+  </div>
+  <div class="field">
+    <%= f.label :transfer_course_alpha %><br>
+    <%= f.text_field :transfer_course_alpha %>
+  </div>
+  <div class="field">
+    <%= f.label :transfer_course_num %><br>
+    <%= f.text_field :transfer_course_num %>
+  </div>
+  <div class="field">
+    <%= f.label :course_title %><br>
+    <%= f.text_field :course_title %>
+  </div>
+  <div class="field">
+    <%= f.label :transfer_inst_name %><br>
+    <%= f.text_field :transfer_inst_name %>
+  </div>
+  <div class="field">
+    <%= f.label :transfer_hours %><br>
+    <%= f.number_field :transfer_hours %>
+  </div>
+  <div class="field">
+    <%= f.label :effective_term %><br>
+    <%= f.text_field :effective_term %>
+  </div>
+  <div class="field">
+    <%= f.label :grp %><br>
+    <%= f.text_field :grp %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

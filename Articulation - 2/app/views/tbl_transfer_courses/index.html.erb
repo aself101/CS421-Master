@@ -1,0 +1,46 @@
+<% provide(:title, 'Transfer Courses') %>
+<h1>Transfer Courses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transferid</th>
+      <th>Transfer course alpha</th>
+      <th>Transfer course num</th>
+      <th>Course title</th>
+      <th>Transfer Institution</th>
+      <th>Transfer hours</th>
+      <th>Effective term</th>
+      <th>Grp</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tbl_transfer_courses.each do |tbl_transfer_course| %>
+      <tr>
+        <td><%= tbl_transfer_course.transferID %></td>
+        <td><%= tbl_transfer_course.transfer_course_alpha %></td>
+        <td><%= tbl_transfer_course.transfer_course_num %></td>
+
+        <td><%= tbl_transfer_course.course_title %></td>
+        <td><%= tbl_transfer_course.transfer_inst_name %></td>
+        <td><%= tbl_transfer_course.transfer_hours %></td>
+        <td><%= tbl_transfer_course.effective_term %></td>
+        <td><%= tbl_transfer_course.grp %></td>
+        <td><%= link_to 'Show', tbl_transfer_course %></td>
+        <td><%= link_to 'Edit', edit_tbl_transfer_course_path(tbl_transfer_course) %></td>
+        <td><%= link_to 'Destroy', tbl_transfer_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add Transfer Course', new_tbl_transfer_course_path,  class: "btn btn-medium btn-primary" %>
+| <% if signed_in? && current_user.admin?%>
+    <%= link_to 'Back', users_path %>
+<% end %>

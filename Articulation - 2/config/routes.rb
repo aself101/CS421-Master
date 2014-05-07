@@ -1,6 +1,8 @@
 Articulation::Application.routes.draw do
-  resources :tbl_institutions
+  resources :tbl_transfer_courses
 
+  resources :tbl_equivalent_courses
+  resources :tbl_institutions
   resources :submissions
   resources :logins
   resources :users

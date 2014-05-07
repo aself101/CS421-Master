@@ -1,0 +1,47 @@
+<% provide(:title, 'Equivalent Courses') %>
+<h1>Listing Equivalent Courses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transferid | </th>
+      <th>Approvalid | </th>
+      <th>Eq course alpha | </th>
+      <th>Eq course num | </th>
+      <th>Course title | </th>
+      <th>Eq hours | </th>
+      <th>Conn | </th>
+      <th>Uhh atr | </th>
+      <th>Pr | </th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tbl_equivalent_courses.each do |tbl_equivalent_course| %>
+      <tr>
+        <td><%= tbl_equivalent_course.transferID %></td>
+        <td><%= tbl_equivalent_course.approvalID %></td>
+        <td><%= tbl_equivalent_course.eq_course_alpha %></td>
+        <td><%= tbl_equivalent_course.eq_course_num %></td>
+        <td><%= tbl_equivalent_course.course_title %></td>
+        <td><%= tbl_equivalent_course.eq_hours %></td>
+        <td><%= tbl_equivalent_course.conn %></td>
+        <td><%= tbl_equivalent_course.uhh_atr %></td>
+        <td><%= tbl_equivalent_course.pr %></td>
+        <td><%= link_to 'Show', tbl_equivalent_course %></td>
+        <td><%= link_to 'Edit', edit_tbl_equivalent_course_path(tbl_equivalent_course) %></td>
+        <td><%= link_to 'Destroy', tbl_equivalent_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Equivalent Course', new_tbl_equivalent_course_path, class: "btn btn-medium btn-primary" %>
+| <% if signed_in? && current_user.admin?%>
+    <%= link_to 'Back', users_path %>
+<% end %>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Transferid:</strong>
+  <%= @tbl_transfer_course.transferID %>
+</p>
+
+<p>
+  <strong>Transfer course alpha:</strong>
+  <%= @tbl_transfer_course.transfer_course_alpha %>
+</p>
+
+<p>
+  <strong>Transfer course num:</strong>
+  <%= @tbl_transfer_course.transfer_course_num %>
+</p>
+
+<p>
+  <strong>Course title:</strong>
+  <%= @tbl_transfer_course.course_title %>
+</p>
+
+<p>
+  <strong>Transfer inst name:</strong>
+  <%= @tbl_transfer_course.transfer_inst_name %>
+</p>
+
+<p>
+  <strong>Transfer hours:</strong>
+  <%= @tbl_transfer_course.transfer_hours %>
+</p>
+
+<p>
+  <strong>Effective term:</strong>
+  <%= @tbl_transfer_course.effective_term %>
+</p>
+
+<p>
+  <strong>Grp:</strong>
+  <%= @tbl_transfer_course.grp %>
+</p>
+
+<%= link_to 'Edit', edit_tbl_transfer_course_path(@tbl_transfer_course) %> |
+<%= link_to 'Back', tbl_transfer_courses_path %>

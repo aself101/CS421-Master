@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506074018) do
+ActiveRecord::Schema.define(version: 20140506222643) do
 
   create_table "logins", primary_key: "user_id", force: true do |t|
     t.string   "email"
@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 20140506074018) do
 
   add_index "tbl_equivalent_course", ["transfer_id"], name: "transfer_id", using: :btree
 
-  create_table "tbl_equivalent_courses", primary_key: "transfer_id", force: true do |t|
-    t.string   "approval_id",     limit: 10, default: "", null: false
+  create_table "tbl_equivalent_courses", primary_key: "transferID", force: true do |t|
+    t.string   "approvalID",      limit: 10, default: "", null: false
     t.string   "eq_course_alpha", limit: 6,               null: false
     t.string   "eq_course_num",   limit: 6,               null: false
     t.string   "course_title",    limit: 50,              null: false
@@ -89,9 +89,6 @@ ActiveRecord::Schema.define(version: 20140506074018) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "tbl_equivalent_courses", ["transfer_id"], name: "transfer_id", using: :btree
-  add_index "tbl_equivalent_courses", ["transfer_id"], name: "transfer_id_2", unique: true, using: :btree
 
   create_table "tbl_institution", primary_key: "institution_name", force: true do |t|
     t.string "city",    limit: 60,  null: false
@@ -107,15 +104,6 @@ ActiveRecord::Schema.define(version: 20140506074018) do
     t.string   "website",    limit: 100
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "tbl_or_equivalent", id: false, force: true do |t|
-    t.string "articulation_id", limit: 10, null: false
-    t.string "eq_course_alpha", limit: 10, null: false
-    t.string "eq_course_num",   limit: 10, null: false
-    t.string "course_title",    limit: 50, null: false
-    t.string "eq_hours",        limit: 5,  null: false
-    t.string "uhh_atr",         limit: 5
   end
 
   create_table "tbl_or_equivalents", primary_key: "articulation_id", force: true do |t|
@@ -168,7 +156,7 @@ ActiveRecord::Schema.define(version: 20140506074018) do
 
   add_index "tbl_transfer_course", ["transfer_inst_name"], name: "transfer_inst_name", using: :btree
 
-  create_table "tbl_transfer_courses", primary_key: "transfer_id", force: true do |t|
+  create_table "tbl_transfer_courses", primary_key: "transferID", force: true do |t|
     t.string   "transfer_course_alpha", limit: 6,  null: false
     t.string   "transfer_course_num",   limit: 6,  null: false
     t.string   "course_title",          limit: 50, null: false
@@ -179,16 +167,6 @@ ActiveRecord::Schema.define(version: 20140506074018) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "tbl_transfers_in", id: false, force: true do |t|
-    t.string   "user_id",               limit: 8,  null: false
-    t.string   "transfer_course_alpha", limit: 6,  null: false
-    t.string   "transfer_course_num",   limit: 6,  null: false
-    t.string   "transfer_inst_name",    limit: 50, null: false
-    t.datetime "submission_time_stamp",            null: false
-  end
-
-  add_index "tbl_transfers_in", ["transfer_inst_name"], name: "transfer_inst_name", using: :btree
 
   create_table "tbl_transfers_ins", primary_key: "user_id", force: true do |t|
     t.string   "transfer_course_alpha", limit: 6,  null: false

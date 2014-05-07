@@ -1,0 +1,53 @@
+<%= form_for(@tbl_equivalent_course) do |f| %>
+  <% if @tbl_equivalent_course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tbl_equivalent_course.errors.count, "error") %> prohibited this tbl_equivalent_course from being saved:</h2>
+
+      <ul>
+      <% @tbl_equivalent_course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :transfer_ID %><br>
+    <%= f.text_field :transferID %>
+  </div>
+  <div class="field">
+    <%= f.label :approval_ID %><br>
+    <%= f.text_field :approvalID %>
+  </div>
+  <div class="field">
+    <%= f.label :eq_course_alpha %><br>
+    <%= f.text_field :eq_course_alpha %>
+  </div>
+  <div class="field">
+    <%= f.label :eq_course_num %><br>
+    <%= f.text_field :eq_course_num %>
+  </div>
+  <div class="field">
+    <%= f.label :course_title %><br>
+    <%= f.text_field :course_title %>
+  </div>
+  <div class="field">
+    <%= f.label :eq_hours %><br>
+    <%= f.number_field :eq_hours %>
+  </div>
+  <div class="field">
+    <%= f.label :conn %><br>
+    <%= f.text_field :conn %>
+  </div>
+  <div class="field">
+    <%= f.label :uhh_atr %><br>
+    <%= f.text_field :uhh_atr %>
+  </div>
+  <div class="field">
+    <%= f.label :pr %><br>
+    <%= f.text_field :pr %>
+  </div>
+    <div class="actions">
+      <%= f.submit "Add Equivalent Course", class: "btn btn-large btn-primary" %>
+    </div>
+<% end %>
